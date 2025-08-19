@@ -1,0 +1,268 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>云成本分析报告 - 2025-08</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .summary-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            flex: 1;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .card-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        .card-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .unpaid {
+            color: red;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f0f0f0;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .chart-box {
+            flex: 1;
+            height: 300px;
+        }
+        .section {
+            margin-top: 30px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>云成本分析报告（账期：2025-08）</h1>
+
+        <!-- 汇总信息 -->
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-title">账户名</div>
+                <div class="card-value">令狐思念</div>
+            </div>
+            <div class="card">
+                <div class="card-title">总成本</div>
+                <div class="card-value">¥142.28</div>
+            </div>
+            <div class="card">
+                <div class="card-title">已支付金额</div>
+                <div class="card-value">¥71.86</div>
+            </div>
+            <div class="card">
+                <div class="card-title">未结清费用</div>
+                <div class="card-value unpaid">¥70.42</div>
+            </div>
+        </div>
+
+        <!-- 成本明细表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>产品名称</th>
+                    <th>实际费用 (¥)</th>
+                    <th>未结清金额 (¥)</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>云原生数据仓库 AnalyticDB PostgreSQL版</td>
+                    <td>0.54</td>
+                    <td>0.00</td>
+                    <td>已结清</td>
+                </tr>
+                <tr>
+                    <td>云服务器 ECS</td>
+                    <td>70.36</td>
+                    <td>0.50</td>
+                    <td>未结清</td>
+                </tr>
+                <tr>
+                    <td>能耗宝</td>
+                    <td>0.76</td>
+                    <td>0.00</td>
+                    <td>已结清</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 图表区域 -->
+        <div class="chart-container">
+            <!-- 成本分布饼图 -->
+            <div class="chart-box">
+                <canvas id="costDistributionChart"></canvas>
+            </div>
+            <!-- 趋势分析柱状图（模拟数据，因无趋势数据） -->
+            <div class="chart-box">
+                <canvas id="trendChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 关键发现 -->
+        <div class="section">
+            <div class="section-title">关键发现</div>
+            <ul>
+                <li>账期2025-08的主要未结清费用来自云服务器ECS，存在0.5元未支付</li>
+                <li>历史账期2025-07的能耗宝费用0.76元已结清</li>
+                <li>所有费用均为后付费模式，无优惠减免</li>
+                <li>抹零金额总计0.233202元（来自ECS和AnalyticDB PG）</li>
+            </ul>
+        </div>
+
+        <!-- 优化建议 -->
+        <div class="section">
+            <div class="section-title">优化建议</div>
+            <ul>
+                <li>建议跟进ECS部分的0.5元未结清费用，确认支付状态</li>
+                <li>考虑为ECS资源设置预算报警，避免小额持续费用累积</li>
+                <li>评估是否需要为常用产品开通代金券或储值卡支付方式</li>
+                <li>对长期使用的ECS按量付费实例进行成本优化分析，评估转包年包月的可行性</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 成本分布饼图
+        const ctx1 = document.getElementById('costDistributionChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['云原生数据仓库 AnalyticDB PostgreSQL版', '云服务器 ECS', '能耗宝'],
+                datasets: [{
+                    data: [0.54, 70.36, 0.76],
+                    backgroundColor: ['#ff9999', '#66b3ff', '#99ff99'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${context.label}: ¥${value.toFixed(2)} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 趋势分析柱状图（模拟数据）
+        const ctx2 = document.getElementById('trendChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['2025-01', '2025-02', '2025-03', '2025-04', '2025-05', '2025-06', '2025-07', '2025-08'],
+                datasets: [{
+                    label: '月度成本 (¥)',
+                    data: [100, 110, 120, 130, 140, 150, 160, 170],
+                    backgroundColor: '#ff9999',
+                    borderColor: '#cc3333',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '成本 (¥)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '月份'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `¥${context.parsed.y.toFixed(2)}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
