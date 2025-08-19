@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>云成本分析报告</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .summary {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .summary-card {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            width: calc(33% - 15px);
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .summary-card h3 {
+            margin-top: 0;
+            color: #34495e;
+        }
+        .summary-card p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f7fa;
+        }
+        .key-findings, .recommendations {
+            margin-top: 30px;
+        }
+        .key-findings h3, .recommendations h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        .key-findings ul, .recommendations ul {
+            padding-left: 20px;
+        }
+        .key-findings li, .recommendations li {
+            margin-bottom: 8px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>云成本分析报告</h1>
+
+        <!-- Summary Cards -->
+        <div class="summary">
+            <div class="summary-card">
+                <h3>账期</h3>
+                <p>未提供</p>
+            </div>
+            <div class="summary-card">
+                <h3>账户名</h3>
+                <p>未提供</p>
+            </div>
+            <div class="summary-card">
+                <h3>总成本</h3>
+                <p>¥0.00</p>
+            </div>
+            <div class="summary-card">
+                <h3>已支付</h3>
+                <p>¥0.00</p>
+            </div>
+            <div class="summary-card">
+                <h3>未结清</h3>
+                <p>¥0.00</p>
+            </div>
+        </div>
+
+        <!-- Cost Breakdown Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>产品名称</th>
+                    <th>实际成本</th>
+                    <th>未结清金额</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" style="text-align:center; color:#95a5a6;">暂无数据</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Key Findings -->
+        <div class="key-findings">
+            <h3>关键发现</h3>
+            <ul>
+                <li>未检索到有效的账单数据，请确认输入信息是否正确或是否存在遗漏。</li>
+            </ul>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="recommendations">
+            <h3>优化建议</h3>
+            <ul>
+                <li>检查输入的账单信息是否完整和准确。</li>
+                <li>确保账单数据包含有效的消费记录以便进行分析。</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
