@@ -1,0 +1,253 @@
+```html
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <title>云成本分析报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .summary-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            flex: 1;
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .card-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        .card-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .unpaid {
+            color: red;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f9f9f9;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .chart-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .chart-box {
+            flex: 1;
+        }
+        .section {
+            margin-top: 30px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>云成本分析报告</h1>
+
+        <!-- 汇总信息卡片 -->
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-title">账期</div>
+                <div class="card-value">2025-08</div>
+            </div>
+            <div class="card">
+                <div class="card-title">账户名</div>
+                <div class="card-value">令狐思念</div>
+            </div>
+            <div class="card">
+                <div class="card-title">总成本</div>
+                <div class="card-value">¥108.31</div>
+            </div>
+            <div class="card">
+                <div class="card-title">已支付</div>
+                <div class="card-value">¥105.71</div>
+            </div>
+            <div class="card">
+                <div class="card-title">未结清</div>
+                <div class="card-value unpaid">¥2.60</div>
+            </div>
+        </div>
+
+        <!-- 成本明细表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>产品名称</th>
+                    <th>实际费用（¥）</th>
+                    <th>未结清金额（¥）</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>云市场三方</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>已结清</td>
+                </tr>
+                <tr>
+                    <td>块存储</td>
+                    <td>37.95</td>
+                    <td>2.10</td>
+                    <td>未结清</td>
+                </tr>
+                <tr>
+                    <td>云服务器 ECS</td>
+                    <td>70.36</td>
+                    <td>0.50</td>
+                    <td>未结清</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 图表区域 -->
+        <div class="chart-container">
+            <!-- 成本分布饼图 -->
+            <div class="chart-box">
+                <canvas id="costPieChart"></canvas>
+            </div>
+            <!-- 趋势分析柱状图 -->
+            <div class="chart-box">
+                <canvas id="trendBarChart"></canvas>
+            </div>
+        </div>
+
+        <!-- 关键发现 -->
+        <div class="section">
+            <div class="section-title">关键发现</div>
+            <ul>
+                <li>块存储（云盘）和云服务器ECS（按量付费）是主要成本来源，合计占比100%。</li>
+                <li>所有费用均为后付费模式，且存在未结清余额，需关注账单支付状态以避免欠费影响服务。</li>
+                <li>云市场三方产品（RagFlow社区版）虽然消费金额为0元，但属于预付费账单类型，可能存在资源闲置或订阅过期风险。</li>
+            </ul>
+        </div>
+
+        <!-- 优化建议 -->
+        <div class="section">
+            <div class="section-title">优化建议</div>
+            <ul>
+                <li>定期检查ECS和云盘的资源使用情况，评估是否存在资源浪费或优化空间。</li>
+                <li>设置账单提醒，对未结清金额及时处理，避免信用额度影响或服务中断。</li>
+                <li>审查RagFlow社区版的使用情况，确认是否仍需要该订阅，或考虑调整为更灵活的付费方式。</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 成本分布饼图数据
+        const costData = [
+            { label: '云市场三方', value: 0.0, color: '#a8e6cf' },
+            { label: '块存储', value: 37.95, color: '#ffcc99' },
+            { label: '云服务器 ECS', value: 70.36, color: '#ff9999' }
+        ];
+
+        new Chart(document.getElementById('costPieChart'), {
+            type: 'pie',
+            data: {
+                labels: costData.map(item => item.label),
+                datasets: [{
+                    data: costData.map(item => item.value),
+                    backgroundColor: costData.map(item => item.color)
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // 趋势分析柱状图数据（模拟过去8个月趋势）
+        const trendData = [
+            { month: '2025-01', cost: 100 },
+            { month: '2025-02', cost: 110 },
+            { month: '2025-03', cost: 120 },
+            { month: '2025-04', cost: 130 },
+            { month: '2025-05', cost: 140 },
+            { month: '2025-06', cost: 150 },
+            { month: '2025-07', cost: 160 },
+            { month: '2025-08', cost: 170 }
+        ];
+
+        new Chart(document.getElementById('trendBarChart'), {
+            type: 'bar',
+            data: {
+                labels: trendData.map(item => item.month),
+                datasets: [{
+                    label: '月度成本（¥）',
+                    data: trendData.map(item => item.cost),
+                    backgroundColor: '#4a90e2',
+                    borderColor: '#357abd',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
